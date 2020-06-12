@@ -2,7 +2,8 @@
 <div>
   <b-nav tabs>
     <b-nav-item active><b>VQuiz</b></b-nav-item>
-    <b-nav-item>Counter: 0/0 </b-nav-item>
+    <b-nav-item>Score: {{numCorrect}}/{{numTotal}} </b-nav-item>
+    <b-nav-item v-if="numCorrect > 0">Intelligence: {{perc}} % </b-nav-item>
 
   </b-nav>
 </div>
@@ -10,7 +11,16 @@
 
 <script>
 export default {
-
+  props:[
+    'numCorrect',
+    'numTotal',
+    'correct_perc'
+  ],
+  computed:{
+    perc: function () {
+      return ((parseInt(this.numCorrect) / parseInt(this.numTotal)) * 100).toFixed(2)
+    }
+  }
 }
 </script>
 
